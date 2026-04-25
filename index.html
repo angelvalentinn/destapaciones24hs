@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DesatapYA — Destapaciones 24hs</title>
+  <meta name="description" content="Servicio profesional de destapaciones rápidas y garantizadas. Disponible las 24 horas, todos los días. Cloacas, cocina, baño y más." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:   #0b1e35;
+      --blue:   #1557a0;
+      --sky:    #2f8ce4;
+      --ice:    #e8f2fc;
+      --white:  #ffffff;
+      --gray:   #6b7c93;
+      --light:  #f4f8fd;
+      --green:  #25D366;
+      --border: #d5e3f0;
+      --rad:    14px;
+      --ff-h:   'Syne', sans-serif;
+      --ff-b:   'DM Sans', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--ff-b);
+      background: var(--white);
+      color: var(--navy);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: 90%; max-width: 1100px; margin: 0 auto; }
+    .section    { padding: 80px 0; }
+    .tag {
+      display: inline-block;
+      background: var(--ice);
+      color: var(--blue);
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 18px;
+    }
+    .section-title {
+      font-family: var(--ff-h);
+      font-size: clamp(1.9rem, 4vw, 2.9rem);
+      line-height: 1.15;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      color: var(--gray);
+      font-size: 1.05rem;
+      max-width: 540px;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(11,30,53,.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      font-family: var(--ff-h);
+      font-size: 1.35rem;
+      color: var(--white);
+      letter-spacing: -.02em;
+    }
+    .logo span { color: var(--sky); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,.72);
+      font-size: .9rem;
+      font-weight: 400;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--sky);
+      color: var(--white) !important;
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-weight: 500 !important;
+      transition: background .2s, transform .15s !important;
+    }
+    .nav-cta:hover { background: var(--blue) !important; transform: translateY(-1px); }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 80px;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 80% 50%, rgba(47,140,228,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(21,87,160,.25) 0%, transparent 60%);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(47,140,228,.15);
+      border: 1px solid rgba(47,140,228,.3);
+      color: var(--sky);
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      border-radius: 99px;
+      margin-bottom: 28px;
+      animation: fadeUp .6s ease both;
+    }
+    .hero-badge .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--sky);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .4; transform: scale(.7); }
+    }
+    .hero h1 {
+      font-family: var(--ff-h);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 22px;
+      animation: fadeUp .7s .1s ease both;
+    }
+    .hero h1 em { font-style: normal; color: var(--sky); }
+    .hero-sub {
+      color: rgba(255,255,255,.65);
+      font-size: 1.1rem;
+      margin-bottom: 38px;
+      animation: fadeUp .7s .2s ease both;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      animation: fadeUp .7s .3s ease both;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--sky);
+      color: var(--white);
+      font-family: var(--ff-b);
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 15px 28px;
+      border-radius: var(--rad);
+      border: none;
+      cursor: pointer;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 24px rgba(47,140,228,.35);
+    }
+    .btn-primary:hover {
+      background: var(--blue);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(47,140,228,.45);
+    }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: transparent;
+      color: rgba(255,255,255,.8);
+      font-family: var(--ff-b);
+      font-size: 1rem;
+      font-weight: 400;
+      padding: 15px 22px;
+      border-radius: var(--rad);
+      border: 1px solid rgba(255,255,255,.2);
+      cursor: pointer;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-ghost:hover { border-color: var(--sky); color: var(--white); }
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      animation: fadeIn .8s .3s ease both;
+    }
+    .hero-card-wrap { position: relative; width: 340px; }
+    .hero-illustration {
+      width: 100%;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 24px;
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .illus-icon-big { font-size: 4rem; text-align: center; margin-bottom: 8px; }
+    .stat-row { display: flex; gap: 12px; }
+    .stat-card {
+      flex: 1;
+      background: rgba(47,140,228,.12);
+      border: 1px solid rgba(47,140,228,.2);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: var(--ff-h);
+      font-size: 1.6rem;
+      color: var(--sky);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-lbl { font-size: .72rem; color: rgba(255,255,255,.55); line-height: 1.3; }
+    .trust-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(37,211,102,.1);
+      border: 1px solid rgba(37,211,102,.25);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: rgba(255,255,255,.8);
+      font-size: .82rem;
+    }
+
+    /* SERVICES */
+    .services { background: var(--light); }
+    .services-head { margin-bottom: 54px; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+      margin-bottom: 54px;
+    }
+    .srv-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--rad);
+      padding: 28px 26px;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .srv-card:hover {
+      border-color: var(--sky);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(47,140,228,.1);
+    }
+    .srv-icon { font-size: 2rem; margin-bottom: 14px; display: block; }
+    .srv-title { font-family: var(--ff-h); font-size: 1.08rem; margin-bottom: 8px; }
+    .srv-desc { color: var(--gray); font-size: .9rem; line-height: 1.6; }
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      border: 1px solid var(--border);
+      border-radius: var(--rad);
+      overflow: hidden;
+      background: var(--white);
+    }
+    .benefit-item {
+      padding: 26px 24px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .benefit-item:last-child { border-right: none; }
+    .benefit-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+    .benefit-text strong { display: block; font-weight: 500; margin-bottom: 3px; font-size: .95rem; }
+    .benefit-text span { font-size: .82rem; color: var(--gray); }
+
+    /* FAQ */
+    .faq { background: var(--white); }
+    .faq-head { margin-bottom: 48px; }
+    .faq-list { max-width: 740px; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 22px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      font-family: var(--ff-b);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--navy);
+      transition: color .2s;
+    }
+    .faq-q:hover { color: var(--sky); }
+    .faq-q .chevron {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      border: 1.5px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .7rem;
+      transition: transform .3s, background .2s, border-color .2s;
+    }
+    .faq-item.open .chevron {
+      transform: rotate(180deg);
+      background: var(--sky);
+      border-color: var(--sky);
+      color: var(--white);
+    }
+    .faq-a {
+      display: none;
+      padding-bottom: 22px;
+      color: var(--gray);
+      font-size: .95rem;
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+    /* CONTACT */
+    .contact { background: var(--navy); }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .contact .section-title { color: var(--white); }
+    .contact .section-sub { color: rgba(255,255,255,.55); }
+    .contact-btns { display: flex; flex-direction: column; gap: 14px; }
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 22px;
+      border-radius: var(--rad);
+      border: 1px solid rgba(255,255,255,.12);
+      transition: transform .18s, border-color .2s, box-shadow .2s;
+      cursor: pointer;
+      color: var(--white);
+    }
+    .contact-btn:hover { transform: translateX(4px); border-color: rgba(255,255,255,.3); }
+    .contact-btn.wa  { background: rgba(37,211,102,.12); border-color: rgba(37,211,102,.25); }
+    .contact-btn.wa:hover  { background: rgba(37,211,102,.2); box-shadow: 0 4px 20px rgba(37,211,102,.15); }
+    .contact-btn.tel { background: rgba(47,140,228,.12); border-color: rgba(47,140,228,.25); }
+    .contact-btn.tel:hover { background: rgba(47,140,228,.2); box-shadow: 0 4px 20px rgba(47,140,228,.15); }
+    .contact-btn.ig  { background: rgba(225,48,108,.12); border-color: rgba(225,48,108,.25); }
+    .contact-btn.ig:hover  { background: rgba(225,48,108,.2); box-shadow: 0 4px 20px rgba(225,48,108,.15); }
+    .cb-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .wa  .cb-icon { background: rgba(37,211,102,.2); }
+    .tel .cb-icon { background: rgba(47,140,228,.2); }
+    .ig  .cb-icon { background: rgba(225,48,108,.2); }
+    .cb-text strong { display: block; font-weight: 500; font-size: .98rem; }
+    .cb-text span   { font-size: .8rem; color: rgba(255,255,255,.5); }
+    .cb-arrow { margin-left: auto; font-size: .85rem; color: rgba(255,255,255,.35); }
+    .zone-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--rad);
+      padding: 28px 26px;
+      margin-top: 28px;
+    }
+    .zone-title {
+      font-family: var(--ff-h);
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .zone-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .zone-tag {
+      background: rgba(47,140,228,.15);
+      border: 1px solid rgba(47,140,228,.25);
+      color: rgba(255,255,255,.75);
+      font-size: .78rem;
+      padding: 5px 12px;
+      border-radius: 99px;
+    }
+
+    /* FOOTER */
+    footer { background: #060f1c; padding: 28px 0; text-align: center; }
+    .footer-logo { font-family: var(--ff-h); font-size: 1.1rem; color: rgba(255,255,255,.5); margin-bottom: 6px; }
+    .footer-logo span { color: var(--sky); }
+    footer p { font-size: .78rem; color: rgba(255,255,255,.25); }
+
+    /* FLOATING WA */
+    .wa-float {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      width: 58px; height: 58px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      box-shadow: 0 4px 20px rgba(37,211,102,.45);
+      z-index: 200;
+      transition: transform .2s, box-shadow .2s;
+      cursor: pointer;
+      animation: popIn .5s 1s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 8px 32px rgba(37,211,102,.6); }
+    .wa-float::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid rgba(37,211,102,.4);
+      animation: ripple 2s ease-in-out infinite;
+    }
+    @keyframes ripple {
+      0%   { transform: scale(1); opacity: 1; }
+      100% { transform: scale(1.4); opacity: 0; }
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(.5); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .section { padding: 60px 0; }
+      .hero-grid { grid-template-columns: 1fr; gap: 44px; padding: 20px 0 40px; }
+      .hero-visual { order: -1; }
+      .hero-card-wrap { width: 100%; max-width: 340px; }
+      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+      .benefit-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .benefit-item:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav aria-label="Navegación principal">
+  <div class="container nav-inner">
+    <a href="#" class="logo" aria-label="DesatapYA inicio">Desatap<span>YA</span></a>
+    <ul class="nav-links" role="list">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contacto" class="nav-cta">Contactar</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio" aria-labelledby="hero-title">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="dot"></span> Disponible ahora mismo
+        </div>
+        <h1 id="hero-title">
+          Destapaciones<br /><em>rápidas</em> y<br />garantizadas
+        </h1>
+        <p class="hero-sub">
+          Servicio profesional de plomería y desagües. Atendemos emergencias
+          las <strong style="color:rgba(255,255,255,.85)">24 horas</strong>, los 365 días del año.
+        </p>
+        <div class="hero-actions">
+          <a href="https://wa.me/5491100000000?text=Hola!%20Necesito%20una%20destapaci%C3%B3n%20urgente." class="btn-primary" aria-label="Contactar por WhatsApp">
+            <span aria-hidden="true">💬</span> Contactar ahora
+          </a>
+          <a href="tel:+5491100000000" class="btn-ghost" aria-label="Llamar por teléfono">
+            <span aria-hidden="true">📞</span> Llamar
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-card-wrap">
+          <div class="hero-illustration">
+            <div class="illus-icon-big">🔧</div>
+            <div class="stat-row">
+              <div class="stat-card">
+                <div class="stat-num">+500</div>
+                <div class="stat-lbl">Trabajos realizados</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-num">24hs</div>
+                <div class="stat-lbl">Atención todo el día</div>
+              </div>
+            </div>
+            <div class="stat-row">
+              <div class="stat-card">
+                <div class="stat-num">&#9733; 4.9</div>
+                <div class="stat-lbl">Calificación promedio</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-num">&#8804; 1h</div>
+                <div class="stat-lbl">Tiempo de llegada</div>
+              </div>
+            </div>
+            <div class="trust-bar">
+              <span>&#10003;</span>
+              <span>Presupuesto sin cargo · Sin letra chica</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section services" id="servicios" aria-labelledby="srv-title">
+  <div class="container">
+    <div class="services-head reveal">
+      <span class="tag">Qué hacemos</span>
+      <h2 class="section-title" id="srv-title">Soluciones para<br />cada obstrucción</h2>
+      <p class="section-sub">Equipados con herramientas profesionales para resolver cualquier situación, rápido y sin daños.</p>
+    </div>
+    <div class="services-grid">
+      <article class="srv-card reveal" style="transition-delay:.05s">
+        <span class="srv-icon" aria-hidden="true">🚿</span>
+        <h3 class="srv-title">Baños</h3>
+        <p class="srv-desc">Destapaciones de inodoros, bañeras, duchas y mingitorios con equipos de alta presión.</p>
+      </article>
+      <article class="srv-card reveal" style="transition-delay:.1s">
+        <span class="srv-icon" aria-hidden="true">🍳</span>
+        <h3 class="srv-title">Cocina</h3>
+        <p class="srv-desc">Destape de piletas, sifones y cañerías de cocina obstruidas por grasa o residuos.</p>
+      </article>
+      <article class="srv-card reveal" style="transition-delay:.15s">
+        <span class="srv-icon" aria-hidden="true">🏚️</span>
+        <h3 class="srv-title">Cloacas</h3>
+        <p class="srv-desc">Limpieza y desobstrucción de columnas cloacales con cámara de inspección incluida.</p>
+      </article>
+      <article class="srv-card reveal" style="transition-delay:.2s">
+        <span class="srv-icon" aria-hidden="true">🌧️</span>
+        <h3 class="srv-title">Desagüe pluvial</h3>
+        <p class="srv-desc">Desobstrucción de patios, terrazas y sumideros para evitar inundaciones.</p>
+      </article>
+      <article class="srv-card reveal" style="transition-delay:.25s">
+        <span class="srv-icon" aria-hidden="true">🔍</span>
+        <h3 class="srv-title">Cámara endoscópica</h3>
+        <p class="srv-desc">Diagnóstico visual de tuberías sin obra para detectar la obstrucción exacta.</p>
+      </article>
+      <article class="srv-card reveal" style="transition-delay:.3s">
+        <span class="srv-icon" aria-hidden="true">💧</span>
+        <h3 class="srv-title">Hidrojetting</h3>
+        <p class="srv-desc">Limpieza profunda con agua a presión para cañerías industriales o con mucho sarro.</p>
+      </article>
+    </div>
+    <div class="benefits reveal">
+      <div class="benefit-item">
+        <span class="benefit-icon" aria-hidden="true">⚡</span>
+        <div class="benefit-text">
+          <strong>Respuesta express</strong>
+          <span>Llegamos en menos de 60 minutos en urgencias</span>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <span class="benefit-icon" aria-hidden="true">🛡️</span>
+        <div class="benefit-text">
+          <strong>Trabajo garantizado</strong>
+          <span>Si no se soluciona, no cobramos</span>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <span class="benefit-icon" aria-hidden="true">💰</span>
+        <div class="benefit-text">
+          <strong>Precios accesibles</strong>
+          <span>Presupuesto sin cargo antes de arrancar</span>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <span class="benefit-icon" aria-hidden="true">🏆</span>
+        <div class="benefit-text">
+          <strong>+10 años de experiencia</strong>
+          <span>Matriculado y con seguro de trabajo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq" id="faq" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="faq-head reveal">
+      <span class="tag">Preguntas frecuentes</span>
+      <h2 class="section-title" id="faq-title">Todo lo que necesitás saber</h2>
+      <p class="section-sub">Respondemos las dudas más comunes antes de que tengas que preguntar.</p>
+    </div>
+    <div class="faq-list reveal" role="list">
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a1">
+          ¿En cuánto tiempo llegan ante una emergencia?
+          <span class="chevron" aria-hidden="true">&#9660;</span>
+        </button>
+        <div class="faq-a" id="faq-a1" role="region">
+          En Capital Federal y zonas aledañas llegamos en un máximo de 60 minutos para emergencias. En horario habitual, coordinamos en el momento según tu disponibilidad.
+        </div>
+      </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a2">
+          ¿Cuánto cuesta una destapación?
+          <span class="chevron" aria-hidden="true">&#9660;</span>
+        </button>
+        <div class="faq-a" id="faq-a2" role="region">
+          El costo varía según el tipo de trabajo, el acceso y la zona. Lo que sí es fijo: el presupuesto es sin cargo y sin compromiso. Nada se cobra sin tu aprobación previa.
+        </div>
+      </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a3">
+          ¿Trabajan los fines de semana y feriados?
+          <span class="chevron" aria-hidden="true">&#9660;</span>
+        </button>
+        <div class="faq-a" id="faq-a3" role="region">
+          Sí. Trabajamos los 365 días del año, incluyendo fines de semana y feriados. Las urgencias no tienen horario y nosotros tampoco.
+        </div>
+      </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a4">
+          ¿En qué zonas trabajan?
+          <span class="chevron" aria-hidden="true">&#9660;</span>
+        </button>
+        <div class="faq-a" id="faq-a4" role="region">
+          Cubrimos toda la Ciudad Autónoma de Buenos Aires y el Gran Buenos Aires (zona norte, sur y oeste). Ante la duda, consultanos por WhatsApp y te confirmamos al instante.
+        </div>
+      </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a5">
+          ¿Necesito hacer obra para destaparlo?
+          <span class="chevron" aria-hidden="true">&#9660;</span>
+        </button>
+        <div class="faq-a" id="faq-a5" role="region">
+          En la mayoría de los casos no. Usamos máquinas destapacañerías y cámara endoscópica que permiten resolver la obstrucción sin romper paredes ni pisos. Si hubiera que hacer algo, te avisamos antes.
+        </div>
+      </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a6">
+          ¿Tienen garantía de trabajo?
+          <span class="chevron" aria-hidden="true">&#9660;</span>
+        </button>
+        <div class="faq-a" id="faq-a6" role="region">
+          Sí. Todos nuestros trabajos tienen garantía. Si el problema vuelve en el plazo acordado, volvemos sin costo adicional. Trabajamos con la confianza de que el resultado dure.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact" id="contacto" aria-labelledby="contact-title">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="reveal">
+        <span class="tag" style="background:rgba(47,140,228,.15);color:var(--sky)">Contacto</span>
+        <h2 class="section-title" id="contact-title">¿Tenés un<br />problema ahora?</h2>
+        <p class="section-sub">
+          Escribinos o llamanos directamente. Respondemos de inmediato, sin formularios ni esperas.
+        </p>
+        <div class="zone-card" aria-label="Zonas de cobertura">
+          <div class="zone-title">
+            <span aria-hidden="true">📍</span> Zonas que cubrimos
+          </div>
+          <div class="zone-list" role="list">
+            <span class="zone-tag" role="listitem">CABA</span>
+            <span class="zone-tag" role="listitem">Zona Norte GBA</span>
+            <span class="zone-tag" role="listitem">Zona Oeste GBA</span>
+            <span class="zone-tag" role="listitem">Zona Sur GBA</span>
+            <span class="zone-tag" role="listitem">+Consultanos</span>
+          </div>
+        </div>
+      </div>
+      <div class="contact-btns reveal" style="transition-delay:.15s">
+        <a href="https://wa.me/5491100000000?text=Hola!%20Necesito%20ayuda%20con%20una%20destapaci%C3%B3n." class="contact-btn wa" aria-label="Contactar por WhatsApp">
+          <div class="cb-icon" aria-hidden="true">💬</div>
+          <div class="cb-text">
+            <strong>WhatsApp</strong>
+            <span>Respuesta inmediata</span>
+          </div>
+          <span class="cb-arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="tel:+5491100000000" class="contact-btn tel" aria-label="Llamar por teléfono">
+          <div class="cb-icon" aria-hidden="true">📞</div>
+          <div class="cb-text">
+            <strong>Llamar ahora</strong>
+            <span>+54 9 11 0000-0000</span>
+          </div>
+          <span class="cb-arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="https://instagram.com/destapya" target="_blank" rel="noopener noreferrer" class="contact-btn ig" aria-label="Ver perfil de Instagram">
+          <div class="cb-icon" aria-hidden="true">📸</div>
+          <div class="cb-text">
+            <strong>Instagram</strong>
+            <span>@destapya</span>
+          </div>
+          <span class="cb-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">Desatap<span>YA</span></div>
+    <p>© 2025 DesatapYA · Servicio de plomería profesional · CABA y Gran Buenos Aires</p>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/5491100000000?text=Hola!%20Necesito%20ayuda%20con%20una%20destapaci%C3%B3n." class="wa-float" aria-label="Abrir WhatsApp" title="Contactar por WhatsApp">💬</a>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item   = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
